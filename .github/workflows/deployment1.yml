@@ -1,0 +1,22 @@
+name: Deploy Project(One Job)
+on: workflow_dispatch
+jobs:
+  lint-test-build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: GET CODE
+        uses: actions/checkout@v3
+      - name: SETUP NODEJS ENVIRONMENT
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+      - name: INSTALL DEPENDENCIES
+        run: npm ci
+      - name: RUN LINT
+        run: npm run lint
+      - name: RUN TESTS
+        run: npm run test
+      - name: RUN BUILD
+        run: npm run build
+      - name: DEPLOY
+        run: echo "Deploying..."
